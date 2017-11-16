@@ -9,7 +9,7 @@ public class ShipClass {
     public static ShipClass CRUISER = new ShipClass("Cruiser",2,5,2,Weapons.simple());
     public static ShipClass DREADNOUGHT = new ShipClass("Dreadnought",3,5,1,Weapons.simple(),Weapons.simple());
 
-    public final String name;
+    final String name;
     final int hull;
     final int hitsOn;
     final double initiative;
@@ -22,5 +22,13 @@ public class ShipClass {
         this.initiative = initiative;
         this.weapons = new ArrayList<>();
         this.weapons.addAll(Arrays.asList(weapons));
+    }
+
+    public int getHull() {
+        return hull;
+    }
+
+    public String getName() {
+        return name;
     }
 }

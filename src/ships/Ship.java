@@ -33,7 +33,7 @@ public class Ship {
     public void repair(){
         this.currentHull = shipClass.hull;
     }
-    public String getShipClassName(){
-        return shipClass.name;
+    public ShipClass getShipClass(){
+        return shipClass;
     }
 }

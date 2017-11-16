@@ -9,12 +9,26 @@ public class SameInitiativeShips {
     private BattleSide side;
 
     public SameInitiativeShips(List<TeamedShip> ships) {
+        if (ships.size() == 0) {
+            throw new RuntimeException("Initiative step could not be without ships.");
+        }
+        side = ships.get(0).getSide();
         this.ships = ships;
     }
-    public List<Integer> allRollForDamage(){
+
+    public List<Integer> allRollForDamage() {
         List<Integer> damageInstances = new ArrayList<>();
         ships.stream().map(ship -> ship.getShip().rollForDamage()).forEach(d -> damageInstances.addAll(d));
         return damageInstances;
+    }
+
+    public boolean verify() {
+        for(TeamedShip ts : ships){
+            if (!side.equals(ts.getSide())){
+                return false;
+            }
+        }
+        return true;
     }
 
     public List<TeamedShip> getShips() {

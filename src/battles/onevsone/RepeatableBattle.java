@@ -31,7 +31,7 @@ public class RepeatableBattle {
         double attackerWinPercent = ((double) nOfAttackerWins) / times * 100;
         double defenderWinPercent = ((double) nOfDefenderWins) / times * 100;
 
-        System.out.println(String.format(attacker.getShipClassName() + " attacks " + defender.getShipClassName() + ": (W:%4.1f%% L:%4.1f%%)", attackerWinPercent, defenderWinPercent));
+        System.out.println(String.format(attacker.getShipClass().getName() + " attacks " + defender.getShipClass().getName() + ": (W:%4.1f%% L:%4.1f%%)", attackerWinPercent, defenderWinPercent));
     }
 
 }

@@ -18,4 +18,14 @@ public class TeamedShip {
     public BattleSide getSide() {
         return side;
     }
+    public String reportStatus(){
+        StringBuilder sb = new StringBuilder();
+        sb
+                .append(ship.getShipClass())
+                .append(": ")
+                .append(ship.currentHull)
+                .append("/")
+                .append(ship.getShipClass().getHull());
+        return sb.toString();
+    }
 }
