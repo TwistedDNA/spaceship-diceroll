@@ -1,4 +1,4 @@
-package battles;
+package battles.onevsone;
 
 import ships.Ship;
 
@@ -14,26 +14,29 @@ public class Battle {
     public int fight() {
         while (attacker.alive() && defender.alive()) {
             if (attacker.currentInitiative > defender.currentInitiative ) {
-                defender.receiveDamage(attacker.rollForDamage());
+                defender.receiveDamage(damageFrom(attacker));
                 if (!defender.alive()) {
                     return 1;
                 }
-                attacker.receiveDamage(defender.rollForDamage());
+                attacker.receiveDamage(damageFrom(defender));
                 if (!attacker.alive()) {
                     return 2;
                 }
             }else{
-                attacker.receiveDamage(defender.rollForDamage());
+                attacker.receiveDamage(damageFrom(defender));
                 if (!attacker.alive()) {
                     return 2;
                 }
-                defender.receiveDamage(attacker.rollForDamage());
+                defender.receiveDamage(damageFrom(attacker));
                 if (!defender.alive()) {
                     return 1;
                 }
             }
         }
         return 0;
+    }
+    private int damageFrom(Ship s){
+        return s.rollForDamage().stream().mapToInt(Integer::intValue).sum();
     }
 
 }

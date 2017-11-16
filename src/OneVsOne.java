@@ -1,7 +1,7 @@
-import battles.RepeatableBattle;
+import battles.onevsone.RepeatableBattle;
 import ships.Shipyard;
 
-public class Main {
+public class OneVsOne {
     public static void main(String[] args) {
         new RepeatableBattle(
                 Shipyard.buildInterceptor(),

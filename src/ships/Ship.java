@@ -1,5 +1,8 @@
 package ships;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static util.Dice.d6;
 
 public class Ship {
@@ -16,12 +19,12 @@ public class Ship {
     public void receiveDamage(int damage){
         this.currentHull = this.currentHull - damage < 0 ? 0 : this.currentHull - damage;
     }
-    public int rollForDamage(){
+    public List<Integer> rollForDamage(){
         return shipClass.weapons
                 .stream()
                 .filter(w -> d6()>= shipClass.hitsOn)
                 .map(w -> w.weaponDamage)
-                .reduce(0,(a,b) -> a+b);
+                .collect(Collectors.toList());
     }
 
     public boolean alive(){

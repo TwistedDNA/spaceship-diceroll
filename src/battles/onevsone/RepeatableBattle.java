@@ -1,4 +1,4 @@
-package battles;
+package battles.onevsone;
 
 import ships.Ship;
 
