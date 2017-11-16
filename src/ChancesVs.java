@@ -7,19 +7,19 @@ public class ChancesVs {
         Ship cruiser = new Ship(2, 5, 1);
         Ship dreadnought = new Ship(3, 5, 2);
         System.out.println("Interceptor vs Interceptor");
-        System.out.println(expectedPowerComparisson(interceptor, interceptor));
-        System.out.println(simulateBattle(interceptor, interceptor, 100000));
+        System.out.println(expectedPowerComparison(interceptor, interceptor));
+        System.out.println(simulateBattle(interceptor, interceptor));
 
         System.out.println("Interceptor vs Cruiser");
-        System.out.println(expectedPowerComparisson(interceptor, cruiser));
-        System.out.println(simulateBattle(interceptor, cruiser, 100000));
+        System.out.println(expectedPowerComparison(interceptor, cruiser));
+        System.out.println(simulateBattle(interceptor, cruiser));
 
         System.out.println("Interceptor vs Dreadnought");
-        System.out.println(expectedPowerComparisson(interceptor, dreadnought));
-        System.out.println(simulateBattle(interceptor, dreadnought, 100000));
+        System.out.println(expectedPowerComparison(interceptor, dreadnought));
+        System.out.println(simulateBattle(interceptor, dreadnought));
     }
 
-    private static String expectedPowerComparisson(Ship s1, Ship s2) {
+    private static String expectedPowerComparison(Ship s1, Ship s2) {
         double expectedDamagePerTurnFromFirst = ((7.0 - s1.hitsOn) / 6) * s1.damage;
         double expectedDamagePerTurnFromSecond = ((7.0 - s2.hitsOn) / 6) * s2.damage;
         double expectedLifetimeFirst = ((double) s1.wounds) / expectedDamagePerTurnFromSecond;
@@ -28,10 +28,10 @@ public class ChancesVs {
         return String.format("%3.1f vs %3.1f", chanceToWinFirst, 100 - chanceToWinFirst);
     }
 
-    private static String simulateBattle(Ship s1, Ship s2, int times) {
+    private static String simulateBattle(Ship s1, Ship s2) {
         int s1Win = 0;
         int s2Win = 0;
-        for (int i = 0; i < times; i++) {
+        for (int i = 0; i < 100000; i++) {
             int res = battle(s1, s2);
             if (res > 0) {
                 s1Win++;

@@ -3,7 +3,6 @@ package ships;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 public class ShipClass {
     public static ShipClass INTERCEPTOR = new ShipClass("Interceptor",1,6,3,Weapons.simple());
