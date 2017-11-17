@@ -1,6 +1,7 @@
 package battles.multiship;
 
 import ships.Ship;
+import util.DamageDealerStrategy;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,7 +38,8 @@ public class MultishipBattle {
         }
     }
     private void receiveDamage(List<Integer> damageInstances, List<TeamedShip> beingDamaged){
-        //TODO complex logic
+        DamageDealerStrategy strategy = new DamageDealerStrategy(damageInstances,beingDamaged);
+        strategy.applyDamage();
     }
     private boolean isBattleEnded(){
         return isSomebodyAlive(attackers) && isSomebodyAlive(defenders);
