@@ -18,8 +18,8 @@ public class RepeatableBattle {
         int res;
 
         for (int i = 0; i < times; i++) {
-            attacker.repair();
-            defender.repair();
+            attacker.reset();
+            defender.reset();
 
             Battle b = new Battle(attacker, defender);
             res = b.fight();

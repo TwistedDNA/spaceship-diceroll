@@ -16,24 +16,39 @@ public class Ship {
         this.currentInitiative = shipClass.initiative;
     }
 
-    public void receiveDamage(int damage){
+    public void receiveDamage(int damage) {
         this.currentHull = this.currentHull - damage < 0 ? 0 : this.currentHull - damage;
     }
-    public List<Integer> rollForDamage(){
+
+    public List<Integer> rollForDamage() {
         return shipClass.weapons
                 .stream()
-                .filter(w -> d6()>= shipClass.hitsOn)
+                .filter(w -> d6() >= shipClass.hitsOn)
                 .map(w -> w.weaponDamage)
                 .collect(Collectors.toList());
     }
 
-    public boolean alive(){
+    public boolean alive() {
         return currentHull > 0;
     }
-    public void repair(){
+
+    public void reset() {
         this.currentHull = shipClass.hull;
+        this.currentInitiative = shipClass.initiative;
     }
-    public ShipClass getShipClass(){
+
+    public ShipClass getShipClass() {
         return shipClass;
+    }
+
+    public String reportStatus() {
+        StringBuilder sb = new StringBuilder();
+        sb
+                .append(getShipClass().getName())
+                .append(": ")
+                .append(currentHull)
+                .append("/")
+                .append(getShipClass().getHull());
+        return sb.toString();
     }
 }
