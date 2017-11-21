@@ -7,7 +7,7 @@ import ships.Util;
 import java.util.Arrays;
 import java.util.List;
 
-public class MultiShipBattleTest {
+public class MultiShipBattleRunner {
     public static void main(String[] args) {
         collectStatistics();
     }
@@ -16,14 +16,6 @@ public class MultiShipBattleTest {
         battleHarness(
                 Arrays.asList(
                         Shipyard.buildInterceptor(),
-                        Shipyard.buildDreadnought()
-                ),
-                Arrays.asList(
-                        Shipyard.buildDreadnought()
-                )
-        );
-        battleHarness(
-                Arrays.asList(
                         Shipyard.buildDreadnought()
                 ),
                 Arrays.asList(
