@@ -1,14 +1,14 @@
-TL;DR
+#####TL;DR
 Eclipse spaceship battle simulator and statistics. 
 Run MultiShipBattleRunner for example.
 
-Background
+#####Background
 This project emerged after intense weekend of board game action.
-Among others, Eclipse (https://boardgamegeek.com/boardgame/72125/eclipse) brought lots of fun.
+Among others, [Eclipse](https://boardgamegeek.com/boardgame/72125/eclipse) brought lots of fun.
 In this game spaceship battle results are based on dice rolls with modifications from ship upgrades. 
-So I decided to make a simulation to help foresee my chances before going into hopeless battle.
+So I decided to make a simulation to help foresee my chances before going into hopeless fight.
 
-Features
+#####Features
 Multi ship battles are shown in MultiShipBattleRunner class. Primitive damage mealing 
 strategy makes this simulation not exactly accurate. 
 
@@ -18,6 +18,6 @@ My humble tries to predict outcome of battle based on ship statistics is in Chan
 This should be the most accurate and efficient way of understanding balance of power, 
 but I lack probability theory knowledge to do this right. Will come back to this later.
 
-Planned improvements
+#####Planned improvements
 Find formula to predict battle results more precisely.
 Implement more efficient damage dealing strategy. 
