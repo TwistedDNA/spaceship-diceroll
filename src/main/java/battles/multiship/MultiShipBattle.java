@@ -2,7 +2,7 @@ package battles.multiship;
 
 import ships.Ship;
 import ships.Util;
-import util.DamageDealerStrategy;
+import util.DestroyMostAndDamageSmallest;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,7 +38,7 @@ public class MultiShipBattle {
         }
     }
     private void receiveDamage(List<Integer> damageInstances, List<TeamedShip> beingDamaged){
-        DamageDealerStrategy strategy = new DamageDealerStrategy(damageInstances,beingDamaged);
+        DestroyMostAndDamageSmallest strategy = new DestroyMostAndDamageSmallest(damageInstances,beingDamaged);
         strategy.applyDamage();
     }
     private boolean isBattleEnded(){

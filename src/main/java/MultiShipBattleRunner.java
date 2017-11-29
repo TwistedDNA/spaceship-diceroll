@@ -1,5 +1,6 @@
-package battles.multiship;
 
+import battles.multiship.BattleSide;
+import battles.multiship.MultiShipBattle;
 import ships.Ship;
 import ships.Shipyard;
 import ships.Util;

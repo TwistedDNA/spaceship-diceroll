@@ -12,12 +12,6 @@ So I decided to make a simulation to help foresee my chances before going into h
 Multi ship battles are shown in MultiShipBattleRunner class. Primitive damage mealing 
 strategy makes this simulation not exactly accurate. 
 
-Single ship vs ship battles with statistics display. See OneOnOne class.
-
-My humble tries to predict outcome of battle based on ship statistics is in ChancesVs class.
-This should be the most accurate and efficient way of understanding balance of power, 
-but I lack probability theory knowledge to do this right. Will come back to this later.
-
 ##### Planned improvements
 Find formula to predict battle results more precisely.
 Implement more efficient damage dealing strategy. 
