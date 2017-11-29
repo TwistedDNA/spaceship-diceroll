@@ -2,25 +2,31 @@ package battles.damagestrategies;
 
 import battles.multiship.TeamedShip;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 
-public class DestroyMostAndDamageSmallest implements DamageDealingStrategy {
-    List<Integer> damageInstances;
-    List<TeamedShip> beingDamaged;
+public class DestroyMostAndDamageByPriority implements DamageDealingStrategy {
+    private List<Integer> damageInstances;
+    private List<TeamedShip> beingDamaged;
+    Comparator<TeamedShip> priority;
 
-    public DestroyMostAndDamageSmallest(List<Integer> damageInstances, List<TeamedShip> beingDamaged) {
+    public DestroyMostAndDamageByPriority(List<Integer> damageInstances, List<TeamedShip> beingDamaged, Comparator<TeamedShip> priority) {
         this.damageInstances = damageInstances;
         this.beingDamaged = beingDamaged;
+        this.priority = priority;
     }
 
+    @Override
     public void applyDamage() {
         fitDamageDestroyingShipsInOneShot();
-        damageFirstUntilDead();
+        damageAccordingToPriority();
     }
 
-    private void damageFirstUntilDead() {
+    private void damageAccordingToPriority() {
         List<TeamedShip> sortedByHullLeft = new ArrayList<>(beingDamaged);
-        sortedByHullLeft.sort(new HullLeftComparator());
+        sortedByHullLeft.sort(priority);
         Iterator<Integer> it = damageInstances.iterator();
         while (it.hasNext()) {
             Integer damageInstance = it.next();
@@ -55,16 +61,5 @@ public class DestroyMostAndDamageSmallest implements DamageDealingStrategy {
         }
     }
 
-    class HullLeftComparator implements Comparator<TeamedShip> {
-        @Override
-        public int compare(TeamedShip o1, TeamedShip o2) {
-            int baseDiff = o1.getShip().currentHull - o2.getShip().currentHull;
-            if (!o1.getShip().alive() && o2.getShip().alive()) {
-                return baseDiff - 10;
-            } else if (o1.getShip().alive() && !o2.getShip().alive()) {
-                return baseDiff + 10;
-            }
-            return baseDiff;
-        }
-    }
+
 }

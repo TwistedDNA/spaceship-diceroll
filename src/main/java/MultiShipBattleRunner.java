@@ -16,26 +16,35 @@ public class MultiShipBattleRunner {
     }
 
     private static void collectStatistics(){
-        battleHarness(
+        prepareBattle(
                 Arrays.asList(
                         Shipyard.buildInterceptor(),
+                        Shipyard.buildInterceptor(),
+                        Shipyard.buildInterceptor(),
+                        Shipyard.buildCruiser(),
+                        Shipyard.buildCruiser(),
+                        Shipyard.buildDreadnought(),
                         Shipyard.buildDreadnought()
                 ),
                 Arrays.asList(
+                        Shipyard.buildInterceptor(),
+                        Shipyard.buildInterceptor(),
+                        Shipyard.buildInterceptor(),
+                        Shipyard.buildCruiser(),
+                        Shipyard.buildCruiser(),
+                        Shipyard.buildDreadnought(),
                         Shipyard.buildDreadnought()
-                )
+                ),
+                new DamageDealingStrategyBuilder(DamageDealingStrategyType.DESTROY_MOST_AND_DAMAGE_SMALLEST)
         );
     }
 
-    private static void battleHarness(List<Ship> attackers, List<Ship> defenders) {
+    private static void prepareBattle(List<Ship> attackers, List<Ship> defenders, DamageDealingStrategyBuilder damageDealingStrategyBuilder) {
         int winsOfAttackers = 0;
         System.out.println(Util.announceTeam(attackers, "Attackers"));
         System.out.println(Util.announceTeam(defenders, "Defenders"));
         for(int i=0;i<100000;i++){
-            winsOfAttackers += BattleSide.ATTACKER.equals(new MultiShipBattle(
-                    attackers,
-                    defenders,
-                    new DamageDealingStrategyBuilder(DamageDealingStrategyType.DESTROY_MOST_AND_DAMAGE_SMALLEST)).fight().winner()) ? 1 : 0;
+            winsOfAttackers += BattleSide.ATTACKER.equals(new MultiShipBattle(attackers,defenders,damageDealingStrategyBuilder).fight().winner()) ? 1 : 0;
             Util.massReset(attackers,defenders);
         }
         double percentage = ((double)winsOfAttackers) / 1000;
