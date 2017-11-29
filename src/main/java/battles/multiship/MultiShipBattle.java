@@ -16,12 +16,14 @@ public class MultiShipBattle {
     private List<TeamedShip> defenders = new ArrayList<>();
     private DamageDealingStrategyBuilder attackerStrategy;
     private DamageDealingStrategyBuilder defenderStrategy;
+    private Boolean logEveryBattleStep;
 
-    public MultiShipBattle(List<Ship> attackers, List<Ship> defenders, DamageDealingStrategyBuilder attackerStrategy, DamageDealingStrategyBuilder defenderStrategy) {
+    public MultiShipBattle(List<Ship> attackers, List<Ship> defenders, DamageDealingStrategyBuilder attackerStrategy, DamageDealingStrategyBuilder defenderStrategy, Boolean logEveryBattleStep) {
         attackers.forEach(ship -> this.attackers.add(new TeamedShip(ship, BattleSide.ATTACKER)));
         defenders.forEach(ship -> this.defenders.add(new TeamedShip(ship, BattleSide.DEFENDER)));
         this.attackerStrategy = attackerStrategy;
         this.defenderStrategy = defenderStrategy;
+        this.logEveryBattleStep = logEveryBattleStep;
     }
 
     public MultiShipBattle fight() {
@@ -38,6 +40,9 @@ public class MultiShipBattle {
     private void battleStep(SameInitiativeShips firingSide) {
         List<Integer> damage = firingSide.allRollForDamage();
         receiveDamage(damage, firingSide.getSide());
+        if(logEveryBattleStep){
+            printResults();
+        }
     }
 
     private void receiveDamage(List<Integer> damageInstances, BattleSide side) {
@@ -87,6 +92,7 @@ public class MultiShipBattle {
         for (TeamedShip ship : attackers) {
             shipStates.append(ship.getShip().reportStatus()).append(System.lineSeparator());
         }
+        shipStates.append(System.lineSeparator());
         shipStates.append("Defenders: ").append(System.lineSeparator());
         for (TeamedShip ship : defenders) {
             shipStates.append(ship.getShip().reportStatus()).append(System.lineSeparator());

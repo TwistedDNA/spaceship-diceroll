@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MultiShipBattleRunner {
+    private static final int BATTLES_COUNT = 1;
     public static void main(String[] args) {
         collectStatistics();
     }
@@ -66,8 +67,8 @@ public class MultiShipBattleRunner {
         int winsOfAttackers = 0;
         System.out.println(Util.announceTeam(attackers, "Attackers"));
         System.out.println(Util.announceTeam(defenders, "Defenders"));
-        for (int i = 0; i < 100000; i++) {
-            winsOfAttackers += BattleSide.ATTACKER.equals(new MultiShipBattle(attackers, defenders, attackersStrategy, defendersStrategy).fight().winner()) ? 1 : 0;
+        for (int i = 0; i < BATTLES_COUNT; i++) {
+            winsOfAttackers += BattleSide.ATTACKER.equals(new MultiShipBattle(attackers, defenders, attackersStrategy, defendersStrategy, true).fight().winner()) ? 1 : 0;
             Util.massReset(attackers, defenders);
         }
         double percentage = ((double) winsOfAttackers) / 1000;

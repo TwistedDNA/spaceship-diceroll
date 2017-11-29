@@ -18,7 +18,7 @@ public class SameInitiativeShips {
 
     public List<Integer> allRollForDamage() {
         List<Integer> damageInstances = new ArrayList<>();
-        ships.stream().map(ship -> ship.getShip().rollForDamage()).forEach(d -> damageInstances.addAll(d));
+        ships.stream().filter(s -> s.getShip().alive()).map(ship -> ship.getShip().rollForDamage()).forEach(d -> damageInstances.addAll(d));
         return damageInstances;
     }
 
