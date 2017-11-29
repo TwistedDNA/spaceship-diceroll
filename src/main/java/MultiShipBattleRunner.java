@@ -1,4 +1,6 @@
 
+import battles.damagestrategies.DamageDealingStrategyBuilder;
+import battles.damagestrategies.DamageDealingStrategyType;
 import battles.multiship.BattleSide;
 import battles.multiship.MultiShipBattle;
 import ships.Ship;
@@ -30,7 +32,10 @@ public class MultiShipBattleRunner {
         System.out.println(Util.announceTeam(attackers, "Attackers"));
         System.out.println(Util.announceTeam(defenders, "Defenders"));
         for(int i=0;i<100000;i++){
-            winsOfAttackers += BattleSide.ATTACKER.equals(new MultiShipBattle(attackers,defenders).fight().winner()) ? 1 : 0;
+            winsOfAttackers += BattleSide.ATTACKER.equals(new MultiShipBattle(
+                    attackers,
+                    defenders,
+                    new DamageDealingStrategyBuilder(DamageDealingStrategyType.DESTROY_MOST_AND_DAMAGE_SMALLEST)).fight().winner()) ? 1 : 0;
             Util.massReset(attackers,defenders);
         }
         double percentage = ((double)winsOfAttackers) / 1000;

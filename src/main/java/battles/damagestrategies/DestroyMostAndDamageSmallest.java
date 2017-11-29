@@ -1,14 +1,14 @@
-package util;
+package battles.damagestrategies;
 
 import battles.multiship.TeamedShip;
 
 import java.util.*;
 
-public class DamageDealerStrategy {
+public class DestroyMostAndDamageSmallest implements DamageDealingStrategy {
     List<Integer> damageInstances;
     List<TeamedShip> beingDamaged;
 
-    public DamageDealerStrategy(List<Integer> damageInstances, List<TeamedShip> beingDamaged) {
+    public DestroyMostAndDamageSmallest(List<Integer> damageInstances, List<TeamedShip> beingDamaged) {
         this.damageInstances = damageInstances;
         this.beingDamaged = beingDamaged;
     }
