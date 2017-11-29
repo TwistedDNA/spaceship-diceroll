@@ -14,12 +14,14 @@ import java.util.stream.Collectors;
 public class MultiShipBattle {
     private List<TeamedShip> attackers = new ArrayList<>();
     private List<TeamedShip> defenders = new ArrayList<>();
-    private DamageDealingStrategyBuilder damageDistributor;
+    private DamageDealingStrategyBuilder attackerStrategy;
+    private DamageDealingStrategyBuilder defenderStrategy;
 
-    public MultiShipBattle(List<Ship> attackers, List<Ship> defenders, DamageDealingStrategyBuilder damageDistributor) {
+    public MultiShipBattle(List<Ship> attackers, List<Ship> defenders, DamageDealingStrategyBuilder attackerStrategy, DamageDealingStrategyBuilder defenderStrategy) {
         attackers.forEach(ship -> this.attackers.add(new TeamedShip(ship, BattleSide.ATTACKER)));
         defenders.forEach(ship -> this.defenders.add(new TeamedShip(ship, BattleSide.DEFENDER)));
-        this.damageDistributor = damageDistributor;
+        this.attackerStrategy = attackerStrategy;
+        this.defenderStrategy = defenderStrategy;
     }
 
     public MultiShipBattle fight() {
@@ -35,15 +37,16 @@ public class MultiShipBattle {
 
     private void battleStep(SameInitiativeShips firingSide) {
         List<Integer> damage = firingSide.allRollForDamage();
-        if (firingSide.getSide().equals(BattleSide.ATTACKER)) {
-            receiveDamage(damage, defenders);
-        } else {
-            receiveDamage(damage, attackers);
-        }
+        receiveDamage(damage, firingSide.getSide());
     }
 
-    private void receiveDamage(List<Integer> damageInstances, List<TeamedShip> beingDamaged) {
-        DamageDealingStrategy strategy = damageDistributor.build(damageInstances, beingDamaged);
+    private void receiveDamage(List<Integer> damageInstances, BattleSide side) {
+        DamageDealingStrategy strategy;
+        if (BattleSide.ATTACKER.equals(side)) {
+            strategy = attackerStrategy.build(damageInstances, defenders);
+        } else {
+            strategy = defenderStrategy.build(damageInstances, attackers);
+        }
         strategy.applyDamage();
     }
 
